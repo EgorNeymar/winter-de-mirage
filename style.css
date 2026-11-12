@@ -1,0 +1,506 @@
+
+/* =========================
+   ОСНОВНЫЕ НАСТРОЙКИ
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #080d18;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* =========================
+   ШАПКА САЙТА
+========================= */
+
+header {
+    width: 100%;
+    padding: 22px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #080d18;
+    border-bottom: 1px solid #182b40;
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #43baff;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: #b5c4d7;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #43baff;
+}
+
+.language {
+    padding: 10px 15px;
+    background: #101d30;
+    border: 1px solid #294766;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* =========================
+   ГЛАВНЫЙ ЭКРАН
+========================= */
+
+.hero {
+    min-height: 650px;
+    padding: 150px 8%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(ellipse at center, #12375a 0%, #080d18 70%);
+}
+
+.subtitle {
+    color: #43baff;
+    font-size: 13px;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: 75px;
+    margin: 25px 0;
+    line-height: 1.1;
+    letter-spacing: 3px;
+}
+
+.hero h1 span {
+    color: #43baff;
+    text-shadow: 0 0 30px #168bd1;
+}
+
+.description {
+    color: #aebdd1;
+    font-size: 17px;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.buttons button {
+    padding: 15px 28px;
+    background: #126da8;
+    border: 1px solid #43baff;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.buttons button:hover {
+    background: #43baff;
+    box-shadow: 0 0 20px #43baff77;
+}
+
+.buttons .secondary {
+    background: transparent;
+}
+
+/* =========================
+   СЕРВЕРА
+========================= */
+
+.servers {
+    padding: 100px 8%;
+    text-align: center;
+    background: #0b1423;
+}
+
+.servers h2,
+.privileges h2 {
+    font-size: 42px;
+    margin: 15px 0;
+}
+
+.servers h2 span,
+.privileges h2 span {
+    color: #43baff;
+}
+
+.server-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: 45px auto 0;
+}
+
+.server-card {
+    background: #101d30;
+    border: 1px solid #203b59;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.server-card:hover {
+    transform: translateY(-7px);
+    border-color: #43baff;
+    box-shadow: 0 0 25px #168bd133;
+}
+
+.server-image {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.dust {
+    background-image:
+        linear-gradient(#07101a55, #07101a99),
+        url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=900");
+}
+
+.mirage {
+    background-image:
+        linear-gradient(#07101a55, #07101a99),
+        url("https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=900");
+}
+
+.server-image span {
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-shadow: 0 0 20px black;
+}
+
+.server-info {
+    padding: 25px;
+    text-align: left;
+}
+
+.server-info h3 {
+    color: #43baff;
+    font-size: 23px;
+    margin-bottom: 10px;
+}
+
+.server-info p {
+    color: #aebdd1;
+    margin-bottom: 18px;
+}
+
+.server-status {
+    color: #aebdd1;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background: #e5ad42;
+    border-radius: 50%;
+    margin-right: 7px;
+}
+
+.connect-button {
+    width: 100%;
+    padding: 13px;
+    background: #126da8;
+    border: 1px solid #43baff;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.connect-button:hover {
+    background: #43baff;
+}
+
+/* =========================
+   МАГАЗИН ПРИВИЛЕГИЙ
+========================= */
+
+.privileges {
+    padding: 100px 8%;
+    text-align: center;
+    background: #080d18;
+}
+
+.privileges-description {
+    color: #aebdd1;
+    margin-bottom: 35px;
+}
+
+/* Переключение серверов и сроков */
+
+.shop-switch,
+.duration-switch {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.shop-tab,
+.duration-tab {
+    padding: 13px 22px;
+    color: #aebdd1;
+    background: #101d30;
+    border: 1px solid #203b59;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.shop-tab:hover,
+.duration-tab:hover {
+    border-color: #43baff;
+    color: white;
+}
+
+.shop-tab.active,
+.duration-tab.active {
+    color: white;
+    background: #126da8;
+    border-color: #43baff;
+    box-shadow: 0 0 15px #168bd144;
+}
+
+.selected-server {
+    color: #aebdd1;
+    margin: 15px;
+}
+
+.selected-server span {
+    color: #43baff;
+    font-weight: bold;
+}
+
+/* Карточки */
+
+.privilege-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    max-width: 1150px;
+    margin: 40px auto 0;
+    align-items: stretch;
+}
+
+.privilege-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, #14263d, #0b1423);
+    border: 1px solid #294766;
+    border-radius: 14px;
+    padding: 32px 22px;
+    text-align: left;
+    transition: 0.35s;
+}
+
+.privilege-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px #168bd155;
+}
+
+.privilege-card h3 {
+    font-size: 29px;
+    color: #43baff;
+}
+
+.privilege-level {
+    color: #8196ad;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-top: 8px;
+}
+
+.privilege-price {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 28px 0;
+    color: white;
+}
+
+.privilege-card ul {
+    list-style: none;
+    min-height: 145px;
+}
+
+.privilege-card li {
+    color: #b5c4d7;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+.privilege-card li::before {
+    content: "✓";
+    color: #43baff;
+    margin-right: 10px;
+}
+
+/* VIP */
+
+.privilege-card:first-child {
+    border-color: #368bc5;
+}
+
+/* PREMIUM */
+
+.premium-card {
+    border-color: #b8d5ed;
+    box-shadow: 0 0 18px #a6d7ff22;
+}
+
+.premium-card h3 {
+    color: #d7edff;
+}
+
+/* GOD */
+
+.god-card {
+    border-color: #e9c66d;
+    box-shadow: 0 0 22px #e9c66d22;
+}
+
+.god-card h3 {
+    color: #ffd978;
+}
+
+.god-card:hover {
+    box-shadow: 0 0 35px #e9c66d55;
+}
+
+/* Кнопки покупки */
+
+.buy-button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    border: 1px solid #43baff;
+    border-radius: 6px;
+    background: #126da8;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.buy-button:hover {
+    background: #43baff;
+}
+
+.god-card .buy-button {
+    background: linear-gradient(90deg, #9b7022, #d8ad4c);
+    border-color: #f2d27d;
+    color: white;
+}
+
+.god-card .buy-button:hover {
+    background: #e9c66d;
+    color: #101827;
+}
+
+.shop-message {
+    color: #43baff;
+    margin-top: 25px;
+    min-height: 22px;
+}
+
+/* =========================
+   АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ
+========================= */
+
+@media (max-width: 850px) {
+    header {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .server-container {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+
+    .privilege-container {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+    }
+
+    .hero h1 {
+        font-size: 52px;
+    }
+
+    .servers h2,
+    .privileges h2 {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 500px) {
+    header {
+        justify-content: center;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    .hero {
+        padding: 100px 5%;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .privileges,
+    .servers {
+        padding: 70px 5%;
+    }
+}

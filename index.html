@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winter de Mirage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header>
+        <div class="logo">WINTER <span>DE MIRAGE</span></div>
+
+        <nav>
+            <a href="#home">Главная</a>
+            <a href="#servers">Сервер</a>
+            <a href="#rating">Рейтинг</a>
+            <a href="#privileges">Привилегии</a>
+        </nav>
+
+        <button class="language">RU / UA</button>
+    </header>
+
+    <main id="home">
+
+        <!-- ГЛАВНЫЙ ЭКРАН -->
+        <section class="hero">
+            <p class="subtitle">COUNTER-STRIKE 2 COMMUNITY</p>
+
+            <h1>
+                WINTER DE<br>
+                <span>MIRAGE</span>
+            </h1>
+
+            <p class="description">
+                Твоя игра. Твои правила. Твоя команда.
+            </p>
+
+            <div class="buttons">
+                <button onclick="document.getElementById('servers').scrollIntoView({behavior:'smooth'})">
+                    НАШ СЕРВЕР
+                </button>
+
+                <button class="secondary" onclick="document.getElementById('privileges').scrollIntoView({behavior:'smooth'})">
+                    ПРИВИЛЕГИИ
+                </button>
+            </div>
+        </section>
+
+        <!-- СЕРВЕР -->
+        <section class="servers" id="servers">
+
+            <p class="subtitle">CHOOSE YOUR BATTLEFIELD</p>
+            <h2>НАШ <span>СЕРВЕР</span></h2>
+
+            <div class="server-container">
+
+                <div class="server-card">
+
+                    <div class="server-image mirage">
+                        <span>MIRAGE</span>
+                    </div>
+
+                    <div class="server-info">
+                        <h3>WINTER MIRAGE</h3>
+
+                        <p>Зимняя версия Mirage</p>
+
+                        <div class="server-status">
+                            <span class="status-dot"></span>
+                            Скоро открытие
+                        </div>
+
+                        <button class="connect-button">
+                            ПОДКЛЮЧИТЬСЯ
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- РЕЙТИНГ -->
+        <section class="servers" id="rating">
+
+            <p class="subtitle">TOP PLAYERS</p>
+            <h2>НАШ <span>РЕЙТИНГ</span></h2>
+
+            <p class="description">
+                Таблица лидеров скоро появится.
+            </p>
+
+        </section>
+
+        <!-- МАГАЗИН ПРИВИЛЕГИЙ -->
+        <section class="privileges" id="privileges">
+
+            <p class="subtitle">CHOOSE YOUR ADVANTAGE</p>
+            <h2>НАШИ <span>ПРИВИЛЕГИИ</span></h2>
+
+            <p class="privileges-description">
+                Выбери срок действия и свой уровень
+            </p>
+
+            <p class="selected-server">
+                Выбран сервер:
+                <span id="selected-server">Winter Mirage</span>
+            </p>
+
+            <!-- СРОК ДЕЙСТВИЯ -->
+            <div class="duration-switch">
+
+                <button class="duration-tab active" data-duration="month">
+                    1 месяц
+                </button>
+
+                <button class="duration-tab" data-duration="three">
+                    3 месяца
+                </button>
+
+                <button class="duration-tab" data-duration="forever">
+                    Навсегда
+                </button>
+
+            </div>
+
+            <div class="privilege-container">
+
+                <!-- VIP -->
+                <div class="privilege-card">
+
+                    <h3>VIP</h3>
+                    <p class="privilege-level">СТАРТОВЫЙ УРОВЕНЬ</p>
+
+                    <div class="privilege-price"
+                        data-month="100 ₽ / 55 ₴"
+                        data-three="150 ₽ / 85 ₴"
+                        data-forever="200 ₽ / 110 ₴">
+                        100 ₽ / 55 ₴
+                    </div>
+
+                    <ul>
+                        <li>103 HP</li>
+                        <li>1 шприц с лечением на 50 HP</li>
+                    </ul>
+
+                    <button class="buy-button" data-tier="VIP">
+                        ВЫБРАТЬ VIP
+                    </button>
+
+                </div>
+
+                <!-- PREMIUM -->
+                <div class="privilege-card premium-card">
+
+                    <h3>PREMIUM</h3>
+                    <p class="privilege-level">ПРОДВИНУТЫЙ УРОВЕНЬ</p>
+
+                    <div class="privilege-price"
+                        data-month="300 ₽ / 165 ₴"
+                        data-three="400 ₽ / 220 ₴"
+                        data-forever="500 ₽ / 275 ₴">
+                        300 ₽ / 165 ₴
+                    </div>
+
+                    <ul>
+                        <li>106 HP</li>
+                        <li>2 шприца с лечением на 50 HP</li>
+                        <li>1 дополнительное возрождение</li>
+                    </ul>
+
+                    <button class="buy-button" data-tier="Premium">
+                        ВЫБРАТЬ PREMIUM
+                    </button>
+
+                </div>
+
+                <!-- GOD -->
+                <div class="privilege-card god-card">
+
+                    <h3>GOD</h3>
+                    <p class="privilege-level">МАКСИМАЛЬНЫЙ УРОВЕНЬ</p>
+
+                    <div class="privilege-price"
+                        data-month="600 ₽ / 330 ₴"
+                        data-three="750 ₽ / 415 ₴"
+                        data-forever="900 ₽ / 500 ₴">
+                        600 ₽ / 330 ₴
+                    </div>
+
+                    <ul>
+                        <li>109 HP</li>
+                        <li>2 шприца с лечением на 50 HP</li>
+                        <li>Автобхоп</li>
+                        <li>1 дополнительное возрождение</li>
+                    </ul>
+
+                    <button class="buy-button" data-tier="God">
+                        ВЫБРАТЬ GOD
+                    </button>
+
+                </div>
+
+            </div>
+
+            <p id="shop-message" class="shop-message"></p>
+
+        </section>
+
+    </main>
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        let selectedDuration = "month";
+        let selectedServer = "Winter Mirage";
+
+        const durationButtons = document.querySelectorAll(".duration-tab");
+        const prices = document.querySelectorAll(".privilege-price");
+        const message = document.getElementById("shop-message");
+
+        // ПЕРЕКЛЮЧЕНИЕ СРОКОВ
+        durationButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                durationButtons.forEach(item => {
+                    item.classList.remove("active");
+                });
+
+                button.classList.add("active");
+
+                selectedDuration = button.dataset.duration;
+
+                prices.forEach(price => {
+                    price.textContent = price.dataset[selectedDuration];
+                });
+
+                message.textContent = "";
+
+            });
+
+        });
+
+        // ВЫБОР ПРИВИЛЕГИИ
+        document.querySelectorAll(".buy-button").forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const tier = button.dataset.tier;
+
+                const durationNames = {
+                    month: "1 месяц",
+                    three: "3 месяца",
+                    forever: "навсегда"
+                };
+
+                message.textContent =
+                    "Выбрано: " + tier +
+                    " — " + durationNames[selectedDuration] +
+                    " на сервере " + selectedServer +
+                    ". Покупка пока не подключена.";
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
