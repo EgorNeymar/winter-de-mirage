@@ -1,1 +1,429 @@
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Скины — Winter de Mirage</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #b9eaff;
+    background: radial-gradient(ellipse at top, #e5f7ff, #a9dcf7 65%, #83c6ed);
+    color: #12334d;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    padding: 22px 6%;
+    background: rgba(225, 246, 255, 0.85);
+    border-bottom: 1px solid #8bcdf0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    color: #167db5;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.back {
+    color: #167db5;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 35px 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #126b9f;
+    margin-bottom: 10px;
+    font-size: 34px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #477b9b;
+    margin-bottom: 30px;
+}
+
+.panel {
+    background: rgba(239, 250, 255, 0.8);
+    border: 1px solid #91cfee;
+    border-radius: 15px;
+    padding: 22px;
+    box-shadow: 0 8px 25px rgba(40, 120, 165, 0.12);
+    margin-bottom: 22px;
+}
+
+h2 {
+    color: #167db5;
+    margin-bottom: 17px;
+    font-size: 21px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+button {
+    border: 1px solid #8bc9e9;
+    background: #e2f5ff;
+    color: #236487;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #c4eaff;
+    transform: translateY(-2px);
+}
+
+button.active {
+    background: #279bd5;
+    border-color: #1684c0;
+    color: white;
+    box-shadow: 0 0 14px #8bd5ff;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 20px;
+}
+
+.weapon-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.weapon-list button {
+    width: 100%;
+    text-align: left;
+}
+
+.skin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 15px;
+}
+
+.skin-card {
+    background: #e5f6ff;
+    border: 1px solid #a4d8f1;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.skin-card.selected {
+    border: 2px solid #168dcc;
+    box-shadow: 0 0 15px #8bd5ff;
+}
+
+.skin-image {
+    height: 125px;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #d5f1ff, #91cfee);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #397da2;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.skin-card h3 {
+    color: #176e9e;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.skin-card button {
+    width: 100%;
+}
+
+.selected-info {
+    color: #477b9b;
+    line-height: 1.8;
+}
+
+.cancel {
+    background: #fff0f0;
+    border-color: #e8aaaa;
+    color: #a74747;
+}
+
+.cancel:hover {
+    background: #ffdddd;
+}
+
+@media (max-width: 700px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .weapon-list {
+        max-height: 230px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">❄ WINTER DE MIRAGE</div>
+    <a class="back" href="index.html">← На главную</a>
+</header>
+
+<main>
+    <h1>МАСТЕРСКАЯ СКИНОВ</h1>
+    <p class="subtitle">Настрой внешний вид своего оружия</p>
+
+    <section class="panel">
+        <h2>1. Выбери сторону</h2>
+        <div class="buttons">
+            <button class="active" id="tButton" onclick="setSide('T')">
+                Террористы (T)
+            </button>
+            <button id="ctButton" onclick="setSide('CT')">
+                Контртеррористы (CT)
+            </button>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>2. Выбери категорию</h2>
+        <div class="buttons">
+            <button class="active" onclick="setCategory('weapons', this)">Оружие</button>
+            <button onclick="setCategory('knives', this)">Ножи</button>
+            <button onclick="setCategory('gloves', this)">Перчатки</button>
+        </div>
+    </section>
+
+    <div class="layout">
+        <section class="panel">
+            <h2 id="listTitle">Оружие</h2>
+            <div class="weapon-list" id="weaponList"></div>
+        </section>
+
+        <section class="panel">
+            <h2 id="catalogTitle">Выбери оружие</h2>
+            <div class="skin-grid" id="skinGrid">
+                <p class="selected-info">Сначала выбери предмет слева.</p>
+            </div>
+        </section>
+    </div>
+
+    <section class="panel">
+        <h2>Твой выбор</h2>
+        <p class="selected-info" id="selectionInfo">
+            Пока ничего не выбрано.
+        </p>
+        <br>
+        <button class="cancel" onclick="clearSelection()">Отменить выбор предмета</button>
+    </section>
+</main>
+
+<script>
+let currentSide = "T";
+let currentCategory = "weapons";
+let currentItem = "";
+
+const inventory = {
+    T: {
+        weapons: [
+            "AK-47", "Glock-18", "Galil AR", "MAC-10",
+            "SG 553", "Tec-9", "SSG 08", "AWP",
+            "Desert Eagle", "P250", "Five-SeveN"
+        ],
+        knives: ["Керамбит", "Нож-бабочка", "Штык-нож", "Фальшион"],
+        gloves: ["Спортивные перчатки", "Перчатки спецназа", "Водительские перчатки"]
+    },
+    CT: {
+        weapons: [
+            "M4A4", "M4A1-S", "USP-S", "FAMAS",
+            "MP9", "AUG", "Five-SeveN", "AWP",
+            "Desert Eagle", "P250", "SSG 08"
+        ],
+        knives: ["Керамбит", "Нож-бабочка", "Штык-нож", "Фальшион"],
+        gloves: ["Спортивные перчатки", "Перчатки спецназа", "Водительские перчатки"]
+    }
+};
+
+const skins = {
+    "AK-47": ["Азимов", "Ледяной уголь", "Неоновая революция"],
+    "Glock-18": ["Градиент", "Королева пуль", "Лунная ночь"],
+    "Galil AR": ["Эко", "Щелкунчик", "Сахарная спешка"],
+    "MAC-10": ["Неоновый гонщик", "Дискотехника", "Жар"],
+    "SG 553": ["Ультрафиолет", "Колония IV"],
+    "Tec-9": ["Топливный инжектор", "Айзек"],
+    "SSG 08": ["Кровь в воде", "Призрачный фанатик"],
+    "AWP": ["Азимов", "Элитное снаряжение", "Атерис"],
+    "Desert Eagle": ["Пламя", "Код красный", "Заговор"],
+    "P250": ["Видение", "Картель"],
+    "Five-SeveN": ["Обезьянье дело", "Разъярённая толпа"],
+    "M4A4": ["Вой", "Император", "Звездный крейсер"],
+    "M4A1-S": ["Поток информации", "Ночной ужас", "Панель управления"],
+    "USP-S": ["Убийство подтверждено", "Неонуар", "Предатель"],
+    "FAMAS": ["Механо-пушка", "Валентность"],
+    "MP9": ["Гидра", "Утечка данных"],
+    "AUG": ["Хамелеон", "Стимфалийские птицы"]
+};
+
+const defaultSkins = ["Красный вариант", "Синий вариант", "Золотой вариант"];
+
+let selections = {
+    T: {},
+    CT: {}
+};
+
+function setSide(side) {
+    currentSide = side;
+
+    document.getElementById("tButton").classList.toggle("active", side === "T");
+    document.getElementById("ctButton").classList.toggle("active", side === "CT");
+
+    currentItem = "";
+    renderItems();
+    renderSelection();
+}
+
+function setCategory(category, button) {
+    currentCategory = category;
+    currentItem = "";
+
+    document.querySelectorAll(".buttons button").forEach(btn => {
+        if (btn.closest(".panel") === button.closest(".panel")) {
+            btn.classList.remove("active");
+        }
+    });
+
+    button.classList.add("active");
+    renderItems();
+    renderSelection();
+}
+
+function renderItems() {
+    const list = document.getElementById("weaponList");
+    const items = inventory[currentSide][currentCategory];
+
+    document.getElementById("listTitle").textContent =
+        currentCategory === "weapons" ? "Оружие" :
+        currentCategory === "knives" ? "Ножи" : "Перчатки";
+
+    list.innerHTML = "";
+
+    items.forEach(item => {
+        const button = document.createElement("button");
+        button.textContent = item;
+        button.classList.toggle("active", currentItem === item);
+        button.onclick = () => {
+            currentItem = item;
+            renderItems();
+            renderSkins();
+        };
+        list.appendChild(button);
+    });
+
+    document.getElementById("skinGrid").innerHTML =
+        '<p class="selected-info">Выбери предмет слева.</p>';
+    document.getElementById("catalogTitle").textContent = "Каталог скинов";
+}
+
+function renderSkins() {
+    const grid = document.getElementById("skinGrid");
+    const title = document.getElementById("catalogTitle");
+
+    title.textContent = currentItem;
+    grid.innerHTML = "";
+
+    let skinList = currentCategory === "weapons"
+        ? (skins[currentItem] || defaultSkins)
+        : defaultSkins;
+
+    skinList.forEach(skin => {
+        const card = document.createElement("div");
+        card.className = "skin-card";
+
+        const isSelected = selections[currentSide][currentCategory + ":" + currentItem] === skin;
+        if (isSelected) card.classList.add("selected");
+
+        card.innerHTML = `
+            <div class="skin-image">Изображение скина</div>
+            <h3>${currentItem} | ${skin}</h3>
+            <button>${isSelected ? "Выбрано" : "Выбрать"}</button>
+        `;
+
+        card.querySelector("button").onclick = () => {
+            selections[currentSide][currentCategory + ":" + currentItem] = skin;
+            renderSkins();
+            renderSelection();
+        };
+
+        grid.appendChild(card);
+    });
+}
+
+function renderSelection() {
+    const info = document.getElementById("selectionInfo");
+    const chosen = selections[currentSide];
+    const entries = Object.entries(chosen);
+
+    if (!entries.length) {
+        info.textContent = "Для " + currentSide + " пока ничего не выбрано.";
+        return;
+    }
+
+    info.innerHTML = "<b>Сторона " + currentSide + ":</b><br>" +
+        entries.map(([item, skin]) => item.replace(":", " — ") + " → " + skin).join("<br>");
+}
+
+function clearSelection() {
+    if (!currentItem) {
+        selections[currentSide] = {};
+    } else {
+        delete selections[currentSide][currentCategory + ":" + currentItem];
+    }
+
+    renderItems();
+    renderSelection();
+}
+
+renderItems();
+renderSelection();
+</script>
+
+</body>
+</html>
+
