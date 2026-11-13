@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,97 +6,437 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Winter de Mirage</title>
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Steam профиль */
+        .steam-profile {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            padding: 5px 12px;
+            border: 1px solid rgba(100, 190, 255, 0.35);
+            border-radius: 10px;
+            background: rgba(30, 90, 140, 0.2);
+        }
+
+        .steam-profile img {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .steam-profile span {
+            font-weight: bold;
+            max-width: 130px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Карточки привилегий */
+        .plans {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .plan {
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 20px;
+            transition: 0.25s;
+            text-align: center;
+        }
+
+        .plan.vip {
+            --plan-color: #35c9ff;
+        }
+
+        .plan.premium {
+            --plan-color: #a879ff;
+        }
+
+        .plan.god {
+            --plan-color: #e9bb45;
+        }
+
+        .plan.selected {
+            border-color: var(--plan-color);
+            box-shadow: 0 0 20px color-mix(in srgb, var(--plan-color) 35%, transparent);
+            transform: translateY(-4px);
+        }
+
+        .plan h3 {
+            color: var(--plan-color);
+        }
+
+        .plan .price {
+            display: block;
+            margin: 15px 0;
+        }
+
+        .select-plan-btn {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--plan-color);
+            border-radius: 8px;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .select-plan-btn:hover,
+        .plan.selected .select-plan-btn {
+            background: var(--plan-color);
+            color: #07111c;
+        }
+
+        /* Срок привилегии */
+        .duration-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .duration-btn {
+            padding: 11px 20px;
+            border: 1px solid #438ab9;
+            border-radius: 8px;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .duration-btn.active {
+            background: #287eb8;
+            border-color: #65caff;
+            box-shadow: 0 0 12px rgba(65, 180, 255, 0.4);
+        }
+
+        /* Информация о выборе */
+        .selection-summary {
+            display: none;
+            max-width: 600px;
+            margin: 30px auto 0;
+            padding: 22px;
+            border: 1px solid #438ab9;
+            border-radius: 15px;
+            background: rgba(25, 70, 105, 0.2);
+            text-align: center;
+        }
+
+        .selection-summary.visible {
+            display: block;
+        }
+
+        .selection-summary h3 {
+            margin-top: 0;
+        }
+
+        .selection-summary .selected-price {
+            display: block;
+            margin: 15px 0;
+            font-size: 25px;
+            font-weight: bold;
+            color: #65caff;
+        }
+
+        .selection-summary .selection-name {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+            .plans {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
 <header class="header">
     <div class="logo">❄ WINTER DE MIRAGE</div>
 
     <div class="header-actions">
-       <button class="login-btn" onclick="window.location.href='/.netlify/functions/steam-login'">Войти</button>
-       <button class="register-btn" onclick="window.location.href='/.netlify/functions/steam-login'">Регистрация</button>
-        <button class="lang-btn" onclick="switchLanguage()" id="langButton">UA</button>
+        <button class="login-btn" id="loginButton" onclick="steamLogin()">
+            Войти
+        </button>
+
+        <a class="steam-profile" id="steamProfile"
+           href="#" target="_blank" rel="noopener noreferrer">
+            <img id="steamAvatar" src="" alt="Steam avatar">
+            <span id="steamNickname">Игрок</span>
+        </a>
+
+        <button class="language-btn" onclick="switchLanguage()" id="languageButton">
+            UA
+        </button>
     </div>
 </header>
 
-<nav class="nav">
+<nav class="navigation">
     <a href="#home" data-ru="Главная" data-ua="Головна">Главная</a>
     <a href="#server" data-ru="Сервер" data-ua="Сервер">Сервер</a>
     <a href="#rating" data-ru="Рейтинг" data-ua="Рейтинг">Рейтинг</a>
     <a href="#privileges" data-ru="Привилегии" data-ua="Привілеї">Привилегии</a>
 </nav>
 
-<main>
-    <section class="hero" id="home">
-        <div class="snow">❄</div>
-        <h1>WINTER DE MIRAGE</h1>
-        <p data-ru="Твоя зимняя атмосфера в Counter-Strike 2"
-           data-ua="Твоя зимова атмосфера в Counter-Strike 2">
-           Твоя зимняя атмосфера в Counter-Strike 2
+<section class="hero" id="home">
+    <div class="snowflake">❄</div>
+    <h1>WINTER DE MIRAGE</h1>
+
+    <p data-ru="Твоя зимняя атмосфера в Counter-Strike 2"
+       data-ua="Твоя зимова атмосфера в Counter-Strike 2">
+       Твоя зимняя атмосфера в Counter-Strike 2
+    </p>
+
+    <a href="#server" class="main-button"
+       data-ru="Наш сервер" data-ua="Наш сервер">Наш сервер</a>
+</section>
+
+<section class="section" id="server">
+    <h2 data-ru="Наш сервер" data-ua="Наш сервер">Наш сервер</h2>
+
+    <div class="server-card">
+        <h3>❄ Winter Mirage</h3>
+        <p>Counter-Strike 2</p>
+        <span class="status"
+              data-ru="Скоро открытие"
+              data-ua="Скоро відкриття">Скоро открытие</span>
+        <p>Map: de_mirage</p>
+        <p>IP: Скоро</p>
+    </div>
+</section>
+
+<section class="section" id="rating">
+    <h2 data-ru="Рейтинг игроков" data-ua="Рейтинг гравців">Рейтинг игроков</h2>
+
+    <div class="server-card">
+        <p data-ru="Рейтинг скоро появится"
+           data-ua="Рейтинг скоро з'явиться">
+           Рейтинг скоро появится
         </p>
-        <a href="#server" class="main-btn"
-           data-ru="Наш сервер" data-ua="Наш сервер">Наш сервер</a>
-    </section>
+    </div>
+</section>
 
-    <section class="section" id="server">
-        <h2 data-ru="Наш сервер" data-ua="Наш сервер">Наш сервер</h2>
-        <div class="server-card">
-            <h3>❄ Winter Mirage</h3>
-            <p>Counter-Strike 2</p>
-            <span class="status">Скоро открытие</span>
-            <p>Map: de_mirage</p>
-            <p>IP: Скоро</p>
+<section class="section" id="privileges">
+    <h2 data-ru="Привилегии" data-ua="Привілеї">Привилегии</h2>
+
+    <div class="duration-buttons">
+        <button class="duration-btn active"
+                onclick="changeDuration(0)"
+                data-ru="1 месяц" data-ua="1 місяць">
+            1 месяц
+        </button>
+
+        <button class="duration-btn"
+                onclick="changeDuration(1)"
+                data-ru="3 месяца" data-ua="3 місяці">
+            3 месяца
+        </button>
+
+        <button class="duration-btn"
+                onclick="changeDuration(2)"
+                data-ru="Навсегда" data-ua="Назавжди">
+            Навсегда
+        </button>
+    </div>
+
+    <div class="plans">
+
+        <div class="plan vip" id="plan-vip">
+            <h3>VIP</h3>
+            <p>103 HP</p>
+            <p data-ru="1 шприц — 50 HP"
+               data-ua="1 шприц — 50 HP">1 шприц — 50 HP</p>
+            <strong class="price" id="vip-price">100 ₽ / 55 ₴</strong>
+            <button class="select-plan-btn" onclick="selectPlan('vip')"
+                    data-ru="Выбрать" data-ua="Обрати">Выбрать</button>
         </div>
-    </section>
 
-    <section class="section" id="rating">
-        <h2 data-ru="Рейтинг игроков" data-ua="Рейтинг гравців">Рейтинг игроков</h2>
-        <div class="server-card">
-            <p data-ru="Рейтинг скоро появится"
-               data-ua="Рейтинг скоро з'явиться">
-               Рейтинг скоро появится
-            </p>
+        <div class="plan premium" id="plan-premium">
+            <h3>PREMIUM</h3>
+            <p>106 HP</p>
+            <p data-ru="2 шприца" data-ua="2 шприци">2 шприца</p>
+            <p data-ru="+1 возрождение"
+               data-ua="+1 відродження">+1 возрождение</p>
+            <strong class="price" id="premium-price">300 ₽ / 165 ₴</strong>
+            <button class="select-plan-btn" onclick="selectPlan('premium')"
+                    data-ru="Выбрать" data-ua="Обрати">Выбрать</button>
         </div>
-    </section>
 
-    <section class="section" id="privileges">
-        <h2 data-ru="Привилегии" data-ua="Привілеї">Привилегии</h2>
-
-        <div class="plans">
-            <div class="plan">
-                <h3>VIP</h3>
-                <p>103 HP</p>
-                <p>1 шприц — 50 HP</p>
-                <strong>100 ₽ / 55 ₴</strong>
-            </div>
-
-            <div class="plan">
-                <h3>PREMIUM</h3>
-                <p>106 HP</p>
-                <p>2 шприца</p>
-                <p>+1 возрождение</p>
-                <strong>300 ₽ / 165 ₴</strong>
-            </div>
-
-            <div class="plan">
-                <h3>GOD</h3>
-                <p>109 HP</p>
-                <p>2 шприца</p>
-                <p>Автораспрыжка</p>
-                <p>+1 возрождение</p>
-                <strong>600 ₽ / 330 ₴</strong>
-            </div>
+        <div class="plan god" id="plan-god">
+            <h3>GOD</h3>
+            <p>109 HP</p>
+            <p data-ru="2 шприца" data-ua="2 шприци">2 шприца</p>
+            <p data-ru="Автораспрыжка"
+               data-ua="Автострибки">Автораспрыжка</p>
+            <p data-ru="+1 возрождение"
+               data-ua="+1 відродження">+1 возрождение</p>
+            <strong class="price" id="god-price">600 ₽ / 330 ₴</strong>
+            <button class="select-plan-btn" onclick="selectPlan('god')"
+                    data-ru="Выбрать" data-ua="Обрати">Выбрать</button>
         </div>
-    </section>
-</main>
+
+    </div>
+
+    <div class="selection-summary" id="selectionSummary">
+        <h3 data-ru="Твой выбор" data-ua="Твій вибір">Твой выбор</h3>
+
+        <p class="selection-name" id="selectedPlanName">VIP</p>
+        <p id="selectedDuration">1 месяц</p>
+
+        <span class="selected-price" id="selectedPrice">
+            100 ₽ / 55 ₴
+        </span>
+
+        <p data-ru="Выбор сохранён на этой странице. Оплата пока не подключена."
+           data-ua="Вибір збережено на цій сторінці. Оплату поки не підключено.">
+           Выбор сохранён на этой странице. Оплата пока не подключена.
+        </p>
+    </div>
+</section>
 
 <footer>
-    <p>© 2026 Winter de Mirage</p>
+    © 2026 Winter de Mirage
 </footer>
 
 <script>
 let currentLanguage = "ru";
+let selectedPlan = null;
+let selectedDuration = 0;
 
+const prices = {
+    vip: ["100 ₽ / 55 ₴", "150 ₽ / 85 ₴", "200 ₽ / 110 ₴"],
+    premium: ["300 ₽ / 165 ₴", "400 ₽ / 220 ₴", "500 ₽ / 275 ₴"],
+    god: ["600 ₽ / 330 ₴", "750 ₽ / 415 ₴", "900 ₽ / 500 ₴"]
+};
+
+const planNames = {
+    vip: "VIP",
+    premium: "PREMIUM",
+    god: "GOD"
+};
+
+const durations = {
+    ru: ["1 месяц", "3 месяца", "Навсегда"],
+    ua: ["1 місяць", "3 місяці", "Назавжди"]
+};
+
+// Вход через Steam
+function steamLogin() {
+    window.location.href = "/.netlify/functions/steam-login";
+}
+
+// Проверка авторизации Steam
+async function checkSteamLogin() {
+    const loginButton = document.getElementById("loginButton");
+    const profile = document.getElementById("steamProfile");
+    const avatar = document.getElementById("steamAvatar");
+    const nickname = document.getElementById("steamNickname");
+
+    try {
+        const response = await fetch(
+            "/.netlify/functions/steam-me",
+            {
+                method: "GET",
+                credentials: "same-origin",
+                cache: "no-store"
+            }
+        );
+
+        if (!response.ok) {
+            loginButton.style.display = "";
+            profile.style.display = "none";
+            return;
+        }
+
+        const data = await response.json();
+
+        if (!data.loggedIn || !data.steamId) {
+            loginButton.style.display = "";
+            profile.style.display = "none";
+            return;
+        }
+
+        nickname.textContent = data.nickname || "Steam игрок";
+
+        profile.href =
+            "https://steamcommunity.com/profiles/" + data.steamId;
+
+        if (data.avatar && data.avatar.startsWith("https://")) {
+            avatar.src = data.avatar;
+            avatar.style.display = "";
+        } else {
+            avatar.style.display = "none";
+        }
+
+        loginButton.style.display = "none";
+        profile.style.display = "flex";
+
+    } catch (error) {
+        console.error("Steam login check failed:", error);
+        loginButton.style.display = "";
+        profile.style.display = "none";
+    }
+}
+
+// Выбор срока
+function changeDuration(index) {
+    selectedDuration = index;
+
+    document.getElementById("vip-price").textContent = prices.vip[index];
+    document.getElementById("premium-price").textContent = prices.premium[index];
+    document.getElementById("god-price").textContent = prices.god[index];
+
+    document.querySelectorAll(".duration-btn").forEach((button, i) => {
+        button.classList.toggle("active", i === index);
+    });
+
+    updateSelection();
+}
+
+// Выбор привилегии
+function selectPlan(plan) {
+    selectedPlan = plan;
+
+    document.querySelectorAll(".plan").forEach(card => {
+        card.classList.remove("selected");
+    });
+
+    document.getElementById("plan-" + plan).classList.add("selected");
+
+    document.getElementById("selectionSummary")
+        .classList.add("visible");
+
+    updateSelection();
+}
+
+// Обновление информации о выборе
+function updateSelection() {
+    if (!selectedPlan) return;
+
+    document.getElementById("selectedPlanName").textContent =
+        planNames[selectedPlan];
+
+    document.getElementById("selectedDuration").textContent =
+        durations[currentLanguage][selectedDuration];
+
+    document.getElementById("selectedPrice").textContent =
+        prices[selectedPlan][selectedDuration];
+}
+
+// Переключение языка
 function switchLanguage() {
     currentLanguage = currentLanguage === "ru" ? "ua" : "ru";
 
@@ -104,16 +444,18 @@ function switchLanguage() {
         element.textContent = element.dataset[currentLanguage];
     });
 
-    document.getElementById("langButton").textContent =
+    document.getElementById("languageButton").textContent =
         currentLanguage === "ru" ? "UA" : "RU";
 
     document.documentElement.lang = currentLanguage;
+
+    updateSelection();
 }
 
-function login() {
-    alert("Авторизация через Steam скоро будет подключена!");
-}
+// Автоматическая проверка при открытии сайта
+document.addEventListener("DOMContentLoaded", checkSteamLogin);
 </script>
 
 </body>
 </html>
+```
