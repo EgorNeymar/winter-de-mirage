@@ -105,11 +105,8 @@ exports.handler = async (event) => {
     return {
       statusCode: 302,
       headers: {
-        Location: site,
-        "Set-Cookie": [
-  `wmd_session=${sessionCookie}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=604800`,
-  "wmd_state=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0"
-]
+       "Set-Cookie": `wmd_session=${sessionCookie}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=604800`,
+"Set-Cookie-2": "wmd_state=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0"
         ]
       },
       body: ""
