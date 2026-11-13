@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* Steam профиль */
         .steam-profile {
             display: none;
             align-items: center;
@@ -36,7 +35,6 @@
             white-space: nowrap;
         }
 
-        /* Карточки привилегий */
         .plans {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -51,17 +49,9 @@
             text-align: center;
         }
 
-        .plan.vip {
-            --plan-color: #35c9ff;
-        }
-
-        .plan.premium {
-            --plan-color: #a879ff;
-        }
-
-        .plan.god {
-            --plan-color: #e9bb45;
-        }
+        .plan.vip { --plan-color: #35c9ff; }
+        .plan.premium { --plan-color: #a879ff; }
+        .plan.god { --plan-color: #e9bb45; }
 
         .plan.selected {
             border-color: var(--plan-color);
@@ -69,14 +59,8 @@
             transform: translateY(-4px);
         }
 
-        .plan h3 {
-            color: var(--plan-color);
-        }
-
-        .plan .price {
-            display: block;
-            margin: 15px 0;
-        }
+        .plan h3 { color: var(--plan-color); }
+        .plan .price { display: block; margin: 15px 0; }
 
         .select-plan-btn {
             width: 100%;
@@ -96,7 +80,6 @@
             color: #07111c;
         }
 
-        /* Срок привилегии */
         .duration-buttons {
             display: flex;
             justify-content: center;
@@ -121,7 +104,6 @@
             box-shadow: 0 0 12px rgba(65, 180, 255, 0.4);
         }
 
-        /* Информация о выборе */
         .selection-summary {
             display: none;
             max-width: 600px;
@@ -133,13 +115,8 @@
             text-align: center;
         }
 
-        .selection-summary.visible {
-            display: block;
-        }
-
-        .selection-summary h3 {
-            margin-top: 0;
-        }
+        .selection-summary.visible { display: block; }
+        .selection-summary h3 { margin-top: 0; }
 
         .selection-summary .selected-price {
             display: block;
@@ -154,39 +131,8 @@
             font-weight: bold;
         }
 
-        /* Отдельное место для отмены */
-        .cancel-selection-area {
-            display: none;
-            justify-content: center;
-            margin: 15px auto 0;
-        }
-
-        .cancel-selection-area.visible {
-            display: flex;
-        }
-
-        .cancel-selection-btn {
-            padding: 11px 25px;
-            border: 1px solid rgba(255, 100, 100, 0.55);
-            border-radius: 8px;
-            background: rgba(150, 35, 35, 0.12);
-            color: #ff9b9b;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-
-        .cancel-selection-btn:hover {
-            background: rgba(190, 50, 50, 0.25);
-            border-color: #ff7777;
-            color: #ffffff;
-            box-shadow: 0 0 12px rgba(255, 80, 80, 0.18);
-        }
-
         @media (max-width: 700px) {
-            .plans {
-                grid-template-columns: 1fr;
-            }
+            .plans { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -218,6 +164,7 @@
     <a href="#server" data-ru="Сервер" data-ua="Сервер">Сервер</a>
     <a href="#rating" data-ru="Рейтинг" data-ua="Рейтинг">Рейтинг</a>
     <a href="#privileges" data-ru="Привилегии" data-ua="Привілеї">Привилегии</a>
+    <a href="skins.html" data-ru="Скины" data-ua="Скіни">Скины</a>
 </nav>
 
 <section class="hero" id="home">
@@ -282,12 +229,10 @@
     </div>
 
     <div class="plans">
-
         <div class="plan vip" id="plan-vip">
             <h3>VIP</h3>
             <p>103 HP</p>
-            <p data-ru="1 шприц — 50 HP"
-               data-ua="1 шприц — 50 HP">1 шприц — 50 HP</p>
+            <p data-ru="1 шприц — 50 HP" data-ua="1 шприц — 50 HP">1 шприц — 50 HP</p>
             <strong class="price" id="vip-price">100 ₽ / 55 ₴</strong>
             <button class="select-plan-btn" onclick="selectPlan('vip')"
                     data-ru="Выбрать" data-ua="Обрати">Выбрать</button>
@@ -297,8 +242,7 @@
             <h3>PREMIUM</h3>
             <p>106 HP</p>
             <p data-ru="2 шприца" data-ua="2 шприци">2 шприца</p>
-            <p data-ru="+1 возрождение"
-               data-ua="+1 відродження">+1 возрождение</p>
+            <p data-ru="+1 возрождение" data-ua="+1 відродження">+1 возрождение</p>
             <strong class="price" id="premium-price">300 ₽ / 165 ₴</strong>
             <button class="select-plan-btn" onclick="selectPlan('premium')"
                     data-ru="Выбрать" data-ua="Обрати">Выбрать</button>
@@ -308,41 +252,23 @@
             <h3>GOD</h3>
             <p>109 HP</p>
             <p data-ru="2 шприца" data-ua="2 шприци">2 шприца</p>
-            <p data-ru="Автораспрыжка"
-               data-ua="Автострибки">Автораспрыжка</p>
-            <p data-ru="+1 возрождение"
-               data-ua="+1 відродження">+1 возрождение</p>
+            <p data-ru="Автораспрыжка" data-ua="Автострибки">Автораспрыжка</p>
+            <p data-ru="+1 возрождение" data-ua="+1 відродження">+1 возрождение</p>
             <strong class="price" id="god-price">600 ₽ / 330 ₴</strong>
             <button class="select-plan-btn" onclick="selectPlan('god')"
                     data-ru="Выбрать" data-ua="Обрати">Выбрать</button>
         </div>
-
     </div>
 
     <div class="selection-summary" id="selectionSummary">
         <h3 data-ru="Твой выбор" data-ua="Твій вибір">Твой выбор</h3>
-
         <p class="selection-name" id="selectedPlanName">VIP</p>
         <p id="selectedDuration">1 месяц</p>
-
-        <span class="selected-price" id="selectedPrice">
-            100 ₽ / 55 ₴
-        </span>
-
+        <span class="selected-price" id="selectedPrice">100 ₽ / 55 ₴</span>
         <p data-ru="Выбор сохранён на этой странице. Оплата пока не подключена."
            data-ua="Вибір збережено на цій сторінці. Оплату поки не підключено.">
            Выбор сохранён на этой странице. Оплата пока не подключена.
         </p>
-    </div>
-
-    <!-- Отдельная кнопка отмены -->
-    <div class="cancel-selection-area" id="cancelSelectionArea">
-        <button class="cancel-selection-btn"
-                onclick="cancelSelection()"
-                data-ru="Отменить выбор"
-                data-ua="Скасувати вибір">
-            Отменить выбор
-        </button>
     </div>
 </section>
 
@@ -372,12 +298,10 @@ const durations = {
     ua: ["1 місяць", "3 місяці", "Назавжди"]
 };
 
-// Вход через Steam
 function steamLogin() {
     window.location.href = "/.netlify/functions/steam-login";
 }
 
-// Проверка авторизации Steam
 async function checkSteamLogin() {
     const loginButton = document.getElementById("loginButton");
     const profile = document.getElementById("steamProfile");
@@ -409,9 +333,7 @@ async function checkSteamLogin() {
         }
 
         nickname.textContent = data.nickname || "Steam игрок";
-
-        profile.href =
-            "https://steamcommunity.com/profiles/" + data.steamId;
+        profile.href = "https://steamcommunity.com/profiles/" + data.steamId;
 
         if (data.avatar && data.avatar.startsWith("https://")) {
             avatar.src = data.avatar;
@@ -430,7 +352,6 @@ async function checkSteamLogin() {
     }
 }
 
-// Выбор срока
 function changeDuration(index) {
     selectedDuration = index;
 
@@ -445,7 +366,6 @@ function changeDuration(index) {
     updateSelection();
 }
 
-// Выбор привилегии
 function selectPlan(plan) {
     selectedPlan = plan;
 
@@ -454,32 +374,11 @@ function selectPlan(plan) {
     });
 
     document.getElementById("plan-" + plan).classList.add("selected");
-
-    document.getElementById("selectionSummary")
-        .classList.add("visible");
-
-    document.getElementById("cancelSelectionArea")
-        .classList.add("visible");
+    document.getElementById("selectionSummary").classList.add("visible");
 
     updateSelection();
 }
 
-// Отмена выбора привилегии
-function cancelSelection() {
-    selectedPlan = null;
-
-    document.querySelectorAll(".plan").forEach(card => {
-        card.classList.remove("selected");
-    });
-
-    document.getElementById("selectionSummary")
-        .classList.remove("visible");
-
-    document.getElementById("cancelSelectionArea")
-        .classList.remove("visible");
-}
-
-// Обновление информации о выборе
 function updateSelection() {
     if (!selectedPlan) return;
 
@@ -493,7 +392,6 @@ function updateSelection() {
         prices[selectedPlan][selectedDuration];
 }
 
-// Переключение языка
 function switchLanguage() {
     currentLanguage = currentLanguage === "ru" ? "ua" : "ru";
 
@@ -509,10 +407,8 @@ function switchLanguage() {
     updateSelection();
 }
 
-// Автоматическая проверка при открытии сайта
 document.addEventListener("DOMContentLoaded", checkSteamLogin);
 </script>
 
 </body>
 </html>
-```
