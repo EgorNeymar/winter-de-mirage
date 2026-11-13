@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Winter de Mirage — Галерея</title>
+<title>Winter de Mirage — Скины</title>
 
 <style>
 * {
@@ -13,89 +13,130 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
+    background: #070d18;
+    color: #eaf4ff;
     font-family: Arial, sans-serif;
-    background: #071522;
-    color: #eaf8ff;
     min-height: 100vh;
 }
 
-header {
-    padding: 22px 7%;
+.header {
+    min-height: 75px;
+    padding: 15px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #102b40;
-    border-bottom: 1px solid #43b9e9;
+    flex-wrap: wrap;
+    gap: 15px;
+    background: #101d30;
+    border-bottom: 1px solid #39bdf5;
+    box-shadow: 0 3px 18px #168ac033;
 }
 
 .logo {
-    color: #72d5ff;
-    font-size: 23px;
+    color: #9de4ff;
+    font-size: 22px;
     font-weight: bold;
+    letter-spacing: 1px;
 }
 
-header a {
-    color: #bdeaff;
+.header a {
+    color: white;
     text-decoration: none;
+    padding: 11px 19px;
+    border: 1px solid #3c9ecb;
+    border-radius: 8px;
+    transition: .2s;
 }
 
-main {
+.header a:hover {
+    background: #168ac0;
+}
+
+.container {
     width: 90%;
     max-width: 1150px;
-    margin: 35px auto;
+    margin: 40px auto;
 }
 
 h1 {
     text-align: center;
-    color: #83dcff;
-    margin-bottom: 30px;
+    font-size: 32px;
+    color: #a9e8ff;
+    margin-bottom: 12px;
+    text-shadow: 0 0 18px #36bfff66;
+}
+
+.subtitle {
+    text-align: center;
+    color: #a9bfd0;
+    margin-bottom: 35px;
 }
 
 h2 {
-    color: #83dcff;
-    margin: 28px 0 17px;
+    text-align: center;
+    font-size: 23px;
+    margin: 28px 0;
+    color: #dff6ff;
 }
 
-.teams, .categories {
+.team-grid,
+.category-grid,
+.items-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
 }
 
-.categories {
-    grid-template-columns: repeat(3, 1fr);
+.category-grid,
+.items-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .card {
-    background: #102b40;
-    border: 1px solid #285b78;
-    border-radius: 14px;
+    background: linear-gradient(145deg, #12263b, #0b192a);
+    border: 1px solid #285c7d;
+    border-radius: 13px;
     overflow: hidden;
     cursor: pointer;
-    transition: .2s;
+    transition: .25s;
+    text-align: center;
 }
 
 .card:hover {
-    border-color: #72d5ff;
-    transform: translateY(-3px);
+    transform: translateY(-4px);
+    border-color: #76d8ff;
+    box-shadow: 0 0 20px #24a9e544;
 }
 
 .card.selected {
-    border: 2px solid #65d5ff;
-    box-shadow: 0 0 15px #269acb55;
+    border: 2px solid #7cddff;
+    box-shadow: 0 0 18px #35bfff66;
 }
 
 .card img {
-    width: 100%;
-    height: 190px;
-    object-fit: cover;
     display: block;
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
 }
 
 .card h3 {
-    text-align: center;
-    padding: 16px 8px;
+    color: white;
+    font-size: 19px;
+    padding: 18px 10px;
+}
+
+.team-card img {
+    height: 270px;
+}
+
+.team-card h3 {
+    font-size: 23px;
 }
 
 .section {
@@ -106,68 +147,85 @@ h2 {
     display: block;
 }
 
+.button-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin: 25px 0;
+}
+
 button {
-    background: #168ac0;
     color: white;
-    border: none;
-    border-radius: 9px;
-    padding: 12px 20px;
-    cursor: pointer;
+    background: linear-gradient(135deg, #168ac0, #14618e);
+    border: 1px solid #5bcaff;
+    border-radius: 8px;
+    padding: 13px 24px;
     font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
 }
 
 button:hover {
-    background: #27a9e5;
+    background: linear-gradient(135deg, #27b5ed, #168ac0);
+    box-shadow: 0 0 15px #36bfff55;
 }
 
-.cancel {
-    background: #344d5d;
+button.secondary {
+    background: #172d40;
+    border-color: #476b82;
 }
 
-.cancel:hover {
-    background: #496a80;
+button.secondary:hover {
+    background: #294b63;
 }
 
-.topline {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.selection {
-    background: #102b40;
-    border: 1px solid #285b78;
-    padding: 18px;
+.selection-box {
+    max-width: 700px;
+    margin: 35px auto;
+    padding: 22px;
+    text-align: center;
+    background: #101f31;
+    border: 1px solid #285c7d;
     border-radius: 12px;
-    margin-top: 28px;
-    line-height: 1.9;
+    line-height: 2;
 }
 
-.item-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+.selection-box h3 {
+    color: #8edfff;
+    margin-bottom: 10px;
 }
 
-.item-grid .card img {
-    height: 180px;
+.selection-box span {
+    color: #a9e8ff;
 }
 
-.back {
-    margin-top: 20px;
+.empty {
+    color: #8299ad !important;
 }
 
-@media(max-width: 700px) {
-    .categories, .item-grid {
-        grid-template-columns: repeat(2, 1fr);
+@media(max-width: 750px) {
+    .category-grid,
+    .items-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-@media(max-width: 450px) {
-    .teams, .categories, .item-grid {
+@media(max-width: 500px) {
+    .team-grid,
+    .category-grid,
+    .items-grid {
         grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .card img {
+        height: 220px;
     }
 }
 </style>
@@ -175,66 +233,82 @@ button:hover {
 
 <body>
 
-<header>
+<header class="header">
     <div class="logo">WINTER DE MIRAGE</div>
     <a href="index.html">← На главную</a>
 </header>
 
-<main>
-    <h1>МАСТЕРСКАЯ ВЫБОРА</h1>
+<main class="container">
 
-    <div id="teamScreen">
-        <h2>1. Выбери сторону</h2>
-        <div class="teams">
-            <div class="card" onclick="chooseTeam('T')">
-                <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=700" alt="T">
+    <h1>МАСТЕРСКАЯ</h1>
+    <p class="subtitle">Выбери сторону и настрой свой внешний вид</p>
+
+    <!-- ВЫБОР СТОРОНЫ -->
+    <section id="teamScreen">
+        <h2>Выбери сторону</h2>
+
+        <div class="team-grid">
+
+            <div class="card team-card" onclick="chooseTeam('T')">
+                <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=900" alt="Зимняя атмосфера">
                 <h3>T — Террористы</h3>
             </div>
 
-            <div class="card" onclick="chooseTeam('CT')">
-                <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=700" alt="CT">
+            <div class="card team-card" onclick="chooseTeam('CT')">
+                <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=900" alt="Лес">
                 <h3>CT — Спецназ</h3>
             </div>
+
         </div>
-    </div>
+    </section>
 
-    <div id="categoryScreen" class="section">
-        <div class="topline">
-            <h2 id="teamTitle">Сторона</h2>
-            <button class="cancel" onclick="backToTeams()">Сменить сторону</button>
+    <!-- ВЫБОР КАТЕГОРИИ -->
+    <section id="categoryScreen" class="section">
+
+        <h2 id="teamTitle"></h2>
+
+        <div class="button-row">
+            <button class="secondary" onclick="backToTeams()">Сменить сторону</button>
         </div>
 
-        <h2>2. Выбери раздел</h2>
+        <h2>Выбери категорию</h2>
 
-        <div class="categories">
+        <div class="category-grid">
+
             <div class="card" onclick="openCategory('characters')">
-                <img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=700" alt="">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800" alt="Персонажи">
                 <h3>Персонажи</h3>
             </div>
 
-            <div class="card" onclick="openCategory('accessories')">
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700" alt="">
-                <h3>Аксессуары</h3>
+            <div class="card" onclick="openCategory('skins')">
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800" alt="Скины">
+                <h3>Скины</h3>
             </div>
 
-            <div class="card" onclick="openCategory('artifacts')">
-                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=700" alt="">
-                <h3>Артефакты</h3>
+            <div class="card" onclick="openCategory('knives')">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800" alt="Ножи">
+                <h3>Ножи</h3>
             </div>
+
         </div>
 
-        <div class="selection" id="summary"></div>
-    </div>
+        <div class="selection-box" id="summary"></div>
+    </section>
 
-    <div id="itemsScreen" class="section">
-        <div class="topline">
-            <h2 id="itemsTitle">Предметы</h2>
-            <button class="cancel" onclick="backToCategories()">Назад</button>
+    <!-- ВЫБОР ПРЕДМЕТА -->
+    <section id="itemsScreen" class="section">
+
+        <h2 id="itemsTitle"></h2>
+
+        <div class="items-grid" id="itemsGrid"></div>
+
+        <div class="button-row">
+            <button class="secondary" onclick="cancelSelection()">Отменить выбор</button>
+            <button onclick="backToCategories()">Назад</button>
         </div>
 
-        <div class="item-grid" id="itemsGrid"></div>
-        <button class="cancel back" onclick="cancelSelection()">Отменить выбор</button>
-    </div>
+    </section>
+
 </main>
 
 <script>
@@ -244,73 +318,79 @@ let currentCategory = "";
 const selections = {
     T: {
         characters: null,
-        accessories: null,
-        artifacts: null
+        skins: null,
+        knives: null
     },
     CT: {
         characters: null,
-        accessories: null,
-        artifacts: null
+        skins: null,
+        knives: null
     }
+};
+
+const categoryNames = {
+    characters: "Персонажи",
+    skins: "Скины",
+    knives: "Ножи"
 };
 
 const catalog = {
     characters: [
         {
             name: "Персонаж 1",
-            image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=700"
+            image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800"
         },
         {
             name: "Персонаж 2",
-            image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700"
+            image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800"
         },
         {
             name: "Персонаж 3",
-            image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=700"
+            image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800"
         }
     ],
-    accessories: [
+
+    skins: [
         {
-            name: "Аксессуар 1",
-            image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700"
+            name: "Образ 1",
+            image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800"
         },
         {
-            name: "Аксессуар 2",
-            image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700"
+            name: "Образ 2",
+            image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800"
         },
         {
-            name: "Аксессуар 3",
-            image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=700"
+            name: "Образ 3",
+            image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800"
         }
     ],
-    artifacts: [
+
+    knives: [
         {
-            name: "Артефакт 1",
-            image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=700"
+            name: "Коллекционный предмет 1",
+            image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800"
         },
         {
-            name: "Артефакт 2",
-            image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=700"
+            name: "Коллекционный предмет 2",
+            image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800"
         },
         {
-            name: "Артефакт 3",
-            image: "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=700"
+            name: "Коллекционный предмет 3",
+            image: "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=800"
         }
     ]
 };
 
-const categoryNames = {
-    characters: "Персонажи",
-    accessories: "Аксессуары",
-    artifacts: "Артефакты"
-};
-
 function chooseTeam(team) {
     currentTeam = team;
+
     document.getElementById("teamScreen").style.display = "none";
     document.getElementById("categoryScreen").classList.add("active");
+    document.getElementById("itemsScreen").classList.remove("active");
+
     document.getElementById("teamTitle").textContent =
-        team === "T" ? "Сторона T — Террористы" : "Сторона CT — Спецназ";
+        team === "T" ? "СТОРОНА T — ТЕРРОРИСТЫ" : "СТОРОНА CT — СПЕЦНАЗ";
+
     updateSummary();
 }
 
@@ -343,12 +423,14 @@ function openCategory(category) {
         const img = document.createElement("img");
         img.src = item.image;
         img.alt = item.name;
+        img.loading = "lazy";
 
         const heading = document.createElement("h3");
         heading.textContent = item.name;
 
         card.appendChild(img);
         card.appendChild(heading);
+
         card.onclick = () => selectItem(index);
 
         grid.appendChild(card);
@@ -373,19 +455,23 @@ function backToCategories() {
     updateSummary();
 }
 
+function getName(category, index) {
+    if (index === null) {
+        return '<span class="empty">Не выбрано</span>';
+    }
+
+    return "<span>" + catalog[category][index].name + "</span>";
+}
+
 function updateSummary() {
     const data = selections[currentTeam];
 
     document.getElementById("summary").innerHTML = `
-        <strong>Выбор стороны ${currentTeam}</strong><br>
+        <h3>Твой выбор — сторона ${currentTeam}</h3>
         Персонаж: ${getName("characters", data.characters)}<br>
-        Аксессуар: ${getName("accessories", data.accessories)}<br>
-        Артефакт: ${getName("artifacts", data.artifacts)}
+        Скин: ${getName("skins", data.skins)}<br>
+        Нож: ${getName("knives", data.knives)}
     `;
-}
-
-function getName(category, index) {
-    return index === null ? "Не выбрано" : catalog[category][index].name;
 }
 </script>
 
