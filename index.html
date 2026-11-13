@@ -154,6 +154,35 @@
             font-weight: bold;
         }
 
+        /* Отдельное место для отмены */
+        .cancel-selection-area {
+            display: none;
+            justify-content: center;
+            margin: 15px auto 0;
+        }
+
+        .cancel-selection-area.visible {
+            display: flex;
+        }
+
+        .cancel-selection-btn {
+            padding: 11px 25px;
+            border: 1px solid rgba(255, 100, 100, 0.55);
+            border-radius: 8px;
+            background: rgba(150, 35, 35, 0.12);
+            color: #ff9b9b;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .cancel-selection-btn:hover {
+            background: rgba(190, 50, 50, 0.25);
+            border-color: #ff7777;
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(255, 80, 80, 0.18);
+        }
+
         @media (max-width: 700px) {
             .plans {
                 grid-template-columns: 1fr;
@@ -305,6 +334,16 @@
            Выбор сохранён на этой странице. Оплата пока не подключена.
         </p>
     </div>
+
+    <!-- Отдельная кнопка отмены -->
+    <div class="cancel-selection-area" id="cancelSelectionArea">
+        <button class="cancel-selection-btn"
+                onclick="cancelSelection()"
+                data-ru="Отменить выбор"
+                data-ua="Скасувати вибір">
+            Отменить выбор
+        </button>
+    </div>
 </section>
 
 <footer>
@@ -419,7 +458,25 @@ function selectPlan(plan) {
     document.getElementById("selectionSummary")
         .classList.add("visible");
 
+    document.getElementById("cancelSelectionArea")
+        .classList.add("visible");
+
     updateSelection();
+}
+
+// Отмена выбора привилегии
+function cancelSelection() {
+    selectedPlan = null;
+
+    document.querySelectorAll(".plan").forEach(card => {
+        card.classList.remove("selected");
+    });
+
+    document.getElementById("selectionSummary")
+        .classList.remove("visible");
+
+    document.getElementById("cancelSelectionArea")
+        .classList.remove("visible");
 }
 
 // Обновление информации о выборе
