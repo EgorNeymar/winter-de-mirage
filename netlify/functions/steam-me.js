@@ -1,6 +1,24 @@
 
 const crypto = require("crypto");
 
+function decodeXml(value) {
+    return value
+        .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
+        .replace(/&amp;/g, "&")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&quot;/g, '"')
+        .replace(/&apos;/g, "'");
+}
+
+function getTag(xml, tag) {
+    const match = xml.match(
+        new RegExp(`<${tag}>([\\s\\S]*?)</${tag}>`, "i")
+    );
+
+    return match ? decodeXml(match[1].trim()) : null;
+}
+
 exports.handler = async (event) => {
     try {
         const secret = process.env.SESSION_SECRET;
@@ -31,9 +49,7 @@ exports.handler = async (event) => {
             sessionCookie.slice("wmd_session=".length)
         );
 
-        const parts = value.split(".");
-        const payload = parts[0];
-        const signature = parts[1];
+        const [payload, signature] = value.split(".");
 
         if (!payload || !signature) {
             return {
@@ -75,14 +91,37 @@ exports.handler = async (event) => {
             };
         }
 
+        const steamId = session.steamId;
+
+        let nickname = null;
+        let avatar = null;
+
+        try {
+            const response = await fetch(
+                `https://steamcommunity.com/profiles/${steamId}/?xml=1`
+            );
+
+            if (response.ok) {
+                const xml = await response.text();
+                nickname = getTag(xml, "steamID");
+                avatar = getTag(xml, "avatarFull");
+            }
+        } catch (error) {
+            // Профиль может быть временно недоступен.
+        }
+
         return {
             statusCode: 200,
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Cache-Control": "no-store"
             },
             body: JSON.stringify({
                 loggedIn: true,
-                steamId: session.steamId
+                steamId,
+                nickname,
+                avatar,
+                profileUrl: `https://steamcommunity.com/profiles/${steamId}`
             })
         };
 
@@ -93,4 +132,3 @@ exports.handler = async (event) => {
         };
     }
 };
-
