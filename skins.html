@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Галерея — Winter de Mirage</title>
+<title>Winter de Mirage — Галерея</title>
 
 <style>
 * {
@@ -14,162 +14,161 @@
 }
 
 body {
-    background: linear-gradient(140deg, #e5f7ff, #a9dcf7, #83c6ed);
-    color: #12334d;
     font-family: Arial, sans-serif;
+    background: #071522;
+    color: #eaf8ff;
     min-height: 100vh;
 }
 
 header {
-    padding: 22px 6%;
-    background: rgba(225,246,255,.9);
-    border-bottom: 1px solid #8bcdf0;
+    padding: 22px 7%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: #102b40;
+    border-bottom: 1px solid #43b9e9;
 }
 
 .logo {
-    color: #167db5;
-    font-size: 22px;
+    color: #72d5ff;
+    font-size: 23px;
     font-weight: bold;
 }
 
-.back {
-    color: #167db5;
+header a {
+    color: #bdeaff;
     text-decoration: none;
-    font-weight: bold;
 }
 
 main {
-    max-width: 1250px;
-    margin: auto;
-    padding: 35px 20px;
+    width: 90%;
+    max-width: 1150px;
+    margin: 35px auto;
 }
 
 h1 {
     text-align: center;
-    color: #126b9f;
-    font-size: 34px;
-    margin-bottom: 10px;
-}
-
-.subtitle {
-    text-align: center;
-    color: #477b9b;
+    color: #83dcff;
     margin-bottom: 30px;
 }
 
-.panel {
-    background: rgba(239,250,255,.85);
-    border: 1px solid #91cfee;
-    border-radius: 16px;
-    padding: 22px;
-    margin-bottom: 22px;
-    box-shadow: 0 8px 25px rgba(40,120,165,.12);
-}
-
 h2 {
-    color: #167db5;
-    margin-bottom: 17px;
+    color: #83dcff;
+    margin: 28px 0 17px;
 }
 
-.buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+.teams, .categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
 }
 
-button {
-    border: 1px solid #8bc9e9;
-    background: #e2f5ff;
-    color: #236487;
-    border-radius: 8px;
-    padding: 12px 19px;
-    font-size: 15px;
-    font-weight: bold;
+.categories {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.card {
+    background: #102b40;
+    border: 1px solid #285b78;
+    border-radius: 14px;
+    overflow: hidden;
     cursor: pointer;
     transition: .2s;
 }
 
-button:hover {
-    background: #c4eaff;
-    transform: translateY(-2px);
+.card:hover {
+    border-color: #72d5ff;
+    transform: translateY(-3px);
 }
 
-button.active {
-    background: #279bd5;
-    color: white;
+.card.selected {
+    border: 2px solid #65d5ff;
+    box-shadow: 0 0 15px #269acb55;
 }
 
-.search {
+.card img {
     width: 100%;
-    padding: 14px;
-    border: 1px solid #91cfee;
-    border-radius: 9px;
-    background: #f4fbff;
-    color: #12334d;
-    font-size: 16px;
-    outline: none;
-}
-
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 18px;
-}
-
-.item {
-    background: #e5f6ff;
-    border: 1px solid #a4d8f1;
-    border-radius: 13px;
-    padding: 12px;
-    text-align: center;
-    transition: .2s;
-}
-
-.item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px #83c6ed;
-}
-
-.item.selected {
-    border: 2px solid #168dcc;
-    box-shadow: 0 0 15px #8bd5ff;
-}
-
-.item img {
-    width: 100%;
-    height: 165px;
+    height: 190px;
     object-fit: cover;
+    display: block;
+}
+
+.card h3 {
+    text-align: center;
+    padding: 16px 8px;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+button {
+    background: #168ac0;
+    color: white;
+    border: none;
     border-radius: 9px;
-    margin-bottom: 12px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 15px;
 }
 
-.item h3 {
-    color: #176e9e;
-    margin-bottom: 12px;
-}
-
-.item button {
-    width: 100%;
-}
-
-.info {
-    color: #477b9b;
-    line-height: 1.8;
+button:hover {
+    background: #27a9e5;
 }
 
 .cancel {
-    margin-top: 12px;
-    background: #fff0f0;
-    border-color: #e8aaaa;
-    color: #a74747;
+    background: #344d5d;
 }
 
-@media(max-width:600px) {
-    h1 { font-size: 26px; }
-    header { padding: 18px; }
+.cancel:hover {
+    background: #496a80;
+}
+
+.topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.selection {
+    background: #102b40;
+    border: 1px solid #285b78;
+    padding: 18px;
+    border-radius: 12px;
+    margin-top: 28px;
+    line-height: 1.9;
+}
+
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.item-grid .card img {
+    height: 180px;
+}
+
+.back {
+    margin-top: 20px;
+}
+
+@media(max-width: 700px) {
+    .categories, .item-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 450px) {
+    .teams, .categories, .item-grid {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 </head>
@@ -177,165 +176,217 @@ button.active {
 <body>
 
 <header>
-    <div class="logo">❄ WINTER DE MIRAGE</div>
-    <a class="back" href="index.html">← На главную</a>
+    <div class="logo">WINTER DE MIRAGE</div>
+    <a href="index.html">← На главную</a>
 </header>
 
 <main>
+    <h1>МАСТЕРСКАЯ ВЫБОРА</h1>
 
-<h1>ГАЛЕРЕЯ ПРЕДМЕТОВ</h1>
-<p class="subtitle">Выбирай понравившиеся предметы</p>
+    <div id="teamScreen">
+        <h2>1. Выбери сторону</h2>
+        <div class="teams">
+            <div class="card" onclick="chooseTeam('T')">
+                <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=700" alt="T">
+                <h3>T — Террористы</h3>
+            </div>
 
-<section class="panel">
-    <h2>Категории</h2>
-    <div class="buttons" id="categories"></div>
-</section>
+            <div class="card" onclick="chooseTeam('CT')">
+                <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=700" alt="CT">
+                <h3>CT — Спецназ</h3>
+            </div>
+        </div>
+    </div>
 
-<section class="panel">
-    <h2>Поиск</h2>
-    <input class="search" id="search"
-           placeholder="Введи название предмета..."
-           oninput="renderGallery()">
-</section>
+    <div id="categoryScreen" class="section">
+        <div class="topline">
+            <h2 id="teamTitle">Сторона</h2>
+            <button class="cancel" onclick="backToTeams()">Сменить сторону</button>
+        </div>
 
-<section class="panel">
-    <h2 id="galleryTitle">Предметы</h2>
-    <div class="gallery" id="gallery"></div>
-</section>
+        <h2>2. Выбери раздел</h2>
 
-<section class="panel">
-    <h2>Твой выбор</h2>
-    <p class="info" id="selection">Пока ничего не выбрано.</p>
-    <button class="cancel" onclick="clearSelection()">
-        Отменить выбор
-    </button>
-</section>
+        <div class="categories">
+            <div class="card" onclick="openCategory('characters')">
+                <img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=700" alt="">
+                <h3>Персонажи</h3>
+            </div>
 
+            <div class="card" onclick="openCategory('accessories')">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700" alt="">
+                <h3>Аксессуары</h3>
+            </div>
+
+            <div class="card" onclick="openCategory('artifacts')">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=700" alt="">
+                <h3>Артефакты</h3>
+            </div>
+        </div>
+
+        <div class="selection" id="summary"></div>
+    </div>
+
+    <div id="itemsScreen" class="section">
+        <div class="topline">
+            <h2 id="itemsTitle">Предметы</h2>
+            <button class="cancel" onclick="backToCategories()">Назад</button>
+        </div>
+
+        <div class="item-grid" id="itemsGrid"></div>
+        <button class="cancel back" onclick="cancelSelection()">Отменить выбор</button>
+    </div>
 </main>
 
 <script>
-const categories = {
-    "Персонажи": [
+let currentTeam = "T";
+let currentCategory = "";
+
+const selections = {
+    T: {
+        characters: null,
+        accessories: null,
+        artifacts: null
+    },
+    CT: {
+        characters: null,
+        accessories: null,
+        artifacts: null
+    }
+};
+
+const catalog = {
+    characters: [
         {
-            name: "Ледяной путешественник",
-            image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=700"
+            name: "Персонаж 1",
+            image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=700"
         },
         {
-            name: "Зимний исследователь",
-            image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=700"
+            name: "Персонаж 2",
+            image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700"
+        },
+        {
+            name: "Персонаж 3",
+            image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=700"
         }
     ],
-
-    "Питомцы": [
+    accessories: [
         {
-            name: "Снежный мир",
-            image: "https://images.unsplash.com/photo-1483664852095-d6cc6870702d?w=700"
+            name: "Аксессуар 1",
+            image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700"
         },
         {
-            name: "Ледяной лес",
-            image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=700"
+            name: "Аксессуар 2",
+            image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700"
+        },
+        {
+            name: "Аксессуар 3",
+            image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=700"
         }
     ],
-
-    "Аксессуары": [
+    artifacts: [
         {
-            name: "Голубой кристалл",
-            image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=700"
+            name: "Артефакт 1",
+            image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=700"
         },
         {
-            name: "Зимнее сияние",
-            image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=700"
-        }
-    ],
-
-    "Артефакты": [
-        {
-            name: "Северное сияние",
-            image: "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=700"
+            name: "Артефакт 2",
+            image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=700"
         },
         {
-            name: "Горная вершина",
-            image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700"
+            name: "Артефакт 3",
+            image: "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=700"
         }
     ]
 };
 
-let currentCategory = "Персонажи";
-let selectedItem = null;
+const categoryNames = {
+    characters: "Персонажи",
+    accessories: "Аксессуары",
+    artifacts: "Артефакты"
+};
 
-function renderCategories() {
-    const container = document.getElementById("categories");
-    container.innerHTML = "";
-
-    Object.keys(categories).forEach(category => {
-        const button = document.createElement("button");
-        button.textContent = category;
-        button.classList.toggle("active", category === currentCategory);
-
-        button.onclick = () => {
-            currentCategory = category;
-            renderCategories();
-            renderGallery();
-        };
-
-        container.appendChild(button);
-    });
+function chooseTeam(team) {
+    currentTeam = team;
+    document.getElementById("teamScreen").style.display = "none";
+    document.getElementById("categoryScreen").classList.add("active");
+    document.getElementById("teamTitle").textContent =
+        team === "T" ? "Сторона T — Террористы" : "Сторона CT — Спецназ";
+    updateSummary();
 }
 
-function renderGallery() {
-    const gallery = document.getElementById("gallery");
-    const search = document.getElementById("search").value.toLowerCase();
+function backToTeams() {
+    document.getElementById("teamScreen").style.display = "block";
+    document.getElementById("categoryScreen").classList.remove("active");
+    document.getElementById("itemsScreen").classList.remove("active");
+}
 
-    gallery.innerHTML = "";
-    document.getElementById("galleryTitle").textContent = currentCategory;
+function openCategory(category) {
+    currentCategory = category;
 
-    const items = categories[currentCategory].filter(item =>
-        item.name.toLowerCase().includes(search)
-    );
+    document.getElementById("categoryScreen").classList.remove("active");
+    document.getElementById("itemsScreen").classList.add("active");
 
-    if (items.length === 0) {
-        gallery.textContent = "Ничего не найдено.";
-        return;
-    }
+    document.getElementById("itemsTitle").textContent =
+        categoryNames[category] + " — " + currentTeam;
 
-    items.forEach(item => {
+    const grid = document.getElementById("itemsGrid");
+    grid.innerHTML = "";
+
+    catalog[category].forEach((item, index) => {
         const card = document.createElement("div");
-        card.className = "item";
+        card.className = "card";
 
-        if (selectedItem === item.name) {
+        if (selections[currentTeam][category] === index) {
             card.classList.add("selected");
         }
 
-        card.innerHTML = `
-            <img src="${item.image}" alt="${item.name}">
-            <h3>${item.name}</h3>
-            <button>${selectedItem === item.name ? "Выбрано" : "Выбрать"}</button>
-        `;
+        const img = document.createElement("img");
+        img.src = item.image;
+        img.alt = item.name;
 
-        card.querySelector("button").onclick = () => {
-            selectedItem = item.name;
-            renderGallery();
-            renderSelection();
-        };
+        const heading = document.createElement("h3");
+        heading.textContent = item.name;
 
-        gallery.appendChild(card);
+        card.appendChild(img);
+        card.appendChild(heading);
+        card.onclick = () => selectItem(index);
+
+        grid.appendChild(card);
     });
 }
 
-function renderSelection() {
-    document.getElementById("selection").textContent =
-        selectedItem ? "Выбрано: " + selectedItem : "Пока ничего не выбрано.";
+function selectItem(index) {
+    selections[currentTeam][currentCategory] = index;
+    openCategory(currentCategory);
+    updateSummary();
 }
 
-function clearSelection() {
-    selectedItem = null;
-    renderGallery();
-    renderSelection();
+function cancelSelection() {
+    selections[currentTeam][currentCategory] = null;
+    openCategory(currentCategory);
+    updateSummary();
 }
 
-renderCategories();
-renderGallery();
-renderSelection();
+function backToCategories() {
+    document.getElementById("itemsScreen").classList.remove("active");
+    document.getElementById("categoryScreen").classList.add("active");
+    updateSummary();
+}
+
+function updateSummary() {
+    const data = selections[currentTeam];
+
+    document.getElementById("summary").innerHTML = `
+        <strong>Выбор стороны ${currentTeam}</strong><br>
+        Персонаж: ${getName("characters", data.characters)}<br>
+        Аксессуар: ${getName("accessories", data.accessories)}<br>
+        Артефакт: ${getName("artifacts", data.artifacts)}
+    `;
+}
+
+function getName(category, index) {
+    return index === null ? "Не выбрано" : catalog[category][index].name;
+}
 </script>
 
 </body>
